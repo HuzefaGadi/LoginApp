@@ -11,12 +11,25 @@
         android:layout_alignParentTop="true"
         android:textSize="30dp" />
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/username"
-        android:id="@+id/user_image"
-        android:layout_marginTop="30dp"
-        android:adjustViewBounds="true" />
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/user_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            />
+
+    </FrameLayout>
+
 
 </RelativeLayout>

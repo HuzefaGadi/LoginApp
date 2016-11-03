@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import huzefagadi.com.loginapp.R;
@@ -40,6 +42,7 @@ public class HomeFragment extends Fragment {
         try {
             TextView username = (TextView) view.findViewById(R.id.username);
             ImageView image = (ImageView) view.findViewById(R.id.user_image);
+            final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
             String usernameStr = preferences.getString(Constants.USERNAME, null);
             String welcomeMessage = "Welcome, <b>" + usernameStr + "</b>";
             if (Build.VERSION.SDK_INT >= 24) {
@@ -47,18 +50,27 @@ public class HomeFragment extends Fragment {
             } else {
                 username.setText(Html.fromHtml(welcomeMessage));
             }
-            Picasso picasso = new Picasso.Builder(getActivity())
-                    .listener(new Picasso.Listener() {
-                        @Override
-                        public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                            exception.printStackTrace();
-                        }
-                    })
-                    .build();
+
+            /*
+
+            Picasso is used here to handle the image download and caching. It is an open source library primarily used for image operations.
+
+            We can implement the image handling using the conventional way as well, like using google provided code to load only resized image and not the whole Image at once.
+             */
+            Picasso picasso = new Picasso.Builder(getActivity()).build();
             picasso.load("https://fi.google.com/about/static/images/fi_logo_sq_1200.png")
-                    .placeholder(R.drawable.loading)
                     .error(R.drawable.error)
-                    .into(image);
+                    .into(image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            progressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            // TODO Auto-generated method stub
+                            progressBar.setVisibility(View.GONE);
+                        }});
         } catch (Exception e) {
             e.printStackTrace();
         }
