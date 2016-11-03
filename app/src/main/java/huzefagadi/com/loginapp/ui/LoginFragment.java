@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class LoginFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 try {
                     int length = password.getText().toString().trim().length();
-                    if (length >= Constants.PASSWROD_LIMIT) {
+                    if (length >= Constants.PASSWORD_LIMIT) {
                         isPasswordValid = true;
                     } else {
                         isPasswordValid = false;
@@ -84,7 +85,8 @@ public class LoginFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     //just log the error in stacktrace.
-                    e.printStackTrace();
+
+                    Log.d(Constants.LOG,e.getMessage());
                 }
 
             }
@@ -138,7 +140,7 @@ public class LoginFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     //just log the error in stacktrace.
-                    e.printStackTrace();
+                    Log.d(Constants.LOG,e.getMessage());
                 }
 
             }
@@ -152,15 +154,15 @@ public class LoginFragment extends Fragment {
             public void onFocusChange(View view, boolean b) {
                 try {
                     if (!b) {
-                        if (password.getText().toString().trim().length() < Constants.PASSWROD_LIMIT) {
-                            String passwordError = String.format(getResources().getString(R.string.password_error), Constants.PASSWROD_LIMIT);
-                            //password.setError("Your password cannot be less than "+Constants.PASSWROD_LIMIT+" characters");
+                        if (password.getText().toString().trim().length() < Constants.PASSWORD_LIMIT) {
+                            String passwordError = String.format(getResources().getString(R.string.password_error), Constants.PASSWORD_LIMIT);
+                            //password.setError("Your password cannot be less than "+Constants.PASSWORD_LIMIT+" characters");
                             Toast.makeText(getActivity(), passwordError, Toast.LENGTH_LONG).show();
                         }
                     }
                 } catch (Exception e) {
                     //just log the error in stacktrace.
-                    e.printStackTrace();
+                    Log.d(Constants.LOG,e.getMessage());
                 }
 
 
@@ -183,7 +185,7 @@ public class LoginFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     //just log the error in stacktrace.
-                    e.printStackTrace();
+                    Log.d(Constants.LOG,e.getMessage());
                 }
 
             }

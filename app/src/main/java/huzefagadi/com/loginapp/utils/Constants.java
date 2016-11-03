@@ -8,5 +8,6 @@ public class Constants {
     public static String PREFERENCE_NAME = "LoginApp";
     public static String USERNAME = "username";
     public static int USERNAME_LIMIT = 6;
-    public static int PASSWROD_LIMIT = 6;
+    public static int PASSWORD_LIMIT = 6;
+    public static String LOG = "loginApp";
 }

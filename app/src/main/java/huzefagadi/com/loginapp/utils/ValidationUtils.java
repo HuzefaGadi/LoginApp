@@ -1,6 +1,7 @@
 package huzefagadi.com.loginapp.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +34,7 @@ public class ValidationUtils {
                 return 3;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d(Constants.LOG,e.getMessage());
             return 3;
         }
 
